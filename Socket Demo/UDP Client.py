@@ -1,6 +1,6 @@
 import socket
 
-if __name__ =="main":
+if __name__ =="__main__":
     target_host = "www.baidu.com"
     target_port = 80
 

@@ -22,5 +22,5 @@ def main():
         client_handler = threading.Thread(target=handle_client,args=(client,))
         client.handler.start()
                 
-if __name__ == "main":
+if __name__ == "__main__":
     main()        
