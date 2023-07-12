@@ -32,7 +32,7 @@ class NetCat(object):
         if self.args.listen:
             slef.listen()
         else:
-            self.sned()
+            self.send()
         
     def send(self):
         '''Send socket item from stdin and show returned data'''
