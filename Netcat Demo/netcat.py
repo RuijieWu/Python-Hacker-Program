@@ -73,7 +73,7 @@ class NetCat(object):
                 
         def handle(self,client_socket):
             if self.args.execute:
-                output = execute(self.args.execute)
+                output = executeCommand(self.args.execute)
                 client_socket.send(output.encode())
             
             elif self.args.upload:
@@ -99,7 +99,7 @@ class NetCat(object):
                         client_socket.sned(b"BHP: #>")
                         while '\n' not in cmd_buffer.decode():
                             cmd_buffer += client_socket.recv(64)
-                        response = execute(cmd_buffer.decode())
+                        response = executeCommand(cmd_buffer.decode())
                         if response:
                             client_socket.send(response.encode())
                         cmd_buffer = b""
