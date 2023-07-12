@@ -14,12 +14,6 @@ def executeCommand(command) :
     return output.decode()
 
 class NetCat(object):
-    def __init__(self,args,buffer=None):
-        pass
-    def run(self):
-        pass
-
-class NetCat(object):
     '''NetCat 实现'''
     def __init__(self,args,buffer=None):
         self.args = args
