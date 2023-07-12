@@ -1,4 +1,5 @@
 import argparse
+import config
 import socket
 import shlex
 import subprocess
@@ -6,7 +7,8 @@ import sys
 import textwrap
 import threading
 
-def executeCommand(command) :
+def executeCommand(command) -> string :
+    '''执行命令并返回命令执行结果'''
     cmd = command.strip()
     if not cmd :
         return
@@ -29,7 +31,7 @@ class NetCat(object):
             self.send()
         
     def send(self):
-        '''Send socket item from stdin and show returned data'''
+        '''从标准输入读入数据发送至接收端并打印响应内容'''
         self.socket.connect((self.args.target,self.args.port))
         if self.buffer:
             self.socket.send(self.buffer)
@@ -39,25 +41,28 @@ class NetCat(object):
                 rec_len = 1
                 response =''
                 while rec_len:
-                    data = self.socket.recv(4096)
+                    data = self.socket.recv(buffer_max_size)
                     recv_len = len(data)
                     response += data.decode()
-                    if recv_len < 4096:
+                    if recv_len < buffer_max_size:
                         break
                 if response:
                     print(response)
                     buffer = input('>')
                     buffer += '\n'
                     self.socket.send(buffer.encode())
+                    
         except KeyboardInterrupt:
+            '''捕获Ctrl + C关闭程序'''
             print('User terminated')
             self.socket.close()
             sys.exit()
             
         def listen(self):
-            '''listen and handle socket item'''
+            '''通过socket获取信息再并发进行处理'''
             self.socket.bind((self.args.target,self.args.port))
             self.socket.listen(5)
+            
             while True:
                 client_socket , _ = self.socket.accept()
                 client_thread = threading.Thread(
@@ -66,6 +71,7 @@ class NetCat(object):
                 client_thread.start()
                 
         def handle(self,client_socket):
+            '''根据获取到的参数实现对应功能'''
             if self.args.execute:
                 output = executeCommand(self.args.execute)
                 client_socket.send(output.encode())
@@ -74,7 +80,7 @@ class NetCat(object):
                 file_buffer = b""
             
                 while True:
-                    data = client_socket.recv(4096)
+                    data = client_socket.recv(buffer_max_size)
                     if data:
                         file_buffer += data
                     else:
@@ -103,6 +109,7 @@ class NetCat(object):
                         sys.exit()
                 
 def main():
+    '''作为命令解析的中间层向NetCat传递指令'''
     parser = argparse.ArgumentParser(
         description="BHP Net Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
