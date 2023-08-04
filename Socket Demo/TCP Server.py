@@ -1,3 +1,6 @@
+'''
+TCP Socket Program Demo
+'''
 import socket
 import threading
 
@@ -23,4 +26,4 @@ def main():
         client.handler.start()
                 
 if __name__ == "__main__":
-    main()        
+    main()

@@ -1,8 +1,11 @@
+'''
+UDP Socket Program Demo
+'''
 import socket
 
 if __name__ =="__main__":
-    target_host = "www.baidu.com"
-    target_port = 80
+    TARGET_HOST = "www.baidu.com"
+    TARGET_PORT = 80
 
     client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 

@@ -1,1 +1,4 @@
-buffer_max_size = 4096
+'''
+Config file for NetCat Demo
+'''
+BUFFER_MAX_SIZE = 4096
