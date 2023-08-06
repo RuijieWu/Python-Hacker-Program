@@ -5,21 +5,7 @@ URL = ''
 SUCCESS_MARK = "query_success"   #! 页面回显表明查询成功的标志
 ASCII_RANGE = range(ord('a'),1+ord('z'))
 STR_RANGE = [123,125] + list(ASCII_RANGE) + list(range(48,58)) #! flag的字符范围列表，包括花括号、a-z，数字0-9
-''' httpx实现异步发送请求,本脚本将改进为异步执行
-import asyncio
-import httpx
 
-async def send_request():
-    async with httpx.AsyncClient() as client:
-        response = await client.get('https://api.example.com')
-        print(response.status_code)
-        print(response.text)
-
-# 启动异步事件循环并运行请求
-loop = asyncio.get_event_loop()
-loop.run_until_complete(send_request())
-
-'''
 def get_length_of_database():
     '''获取数据库名字长度'''
     i = 1
