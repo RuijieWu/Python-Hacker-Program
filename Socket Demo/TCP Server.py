@@ -23,7 +23,7 @@ def main():
         client,address = server.accept()
         print(f"[*] Accepted connection from {address[0]}:{address[1]}")
         client_handler = threading.Thread(target=handle_client,args=(client,))
-        client.handler.start()
+        client_handler.start()
                 
 if __name__ == "__main__":
     main()

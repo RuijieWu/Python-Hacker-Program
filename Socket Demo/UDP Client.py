@@ -11,7 +11,7 @@ if __name__ =="__main__":
 
     package = ""
 
-    client.sendto(package.encode(),(target_host,target_host))
+    client.sendto(package.encode(),(TARGET_HOST,TARGET_PORT))
 
     response , address = client.recvfrom(4096)
 
