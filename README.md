@@ -9,6 +9,7 @@
 - [x] 尝试学习并编写BurpSuite插件Demo
 - [ ] 用Rust/Go重构并升级SQLBool注入自动化程序
 - [x] 尝试学习并编写3个BurpSuite插件Demo
+- [ ] 为Yakit平台编写插件
 - [ ] 建立Awesome-NetCat仓库当NetCat绝活哥 :P<br>仓库内容包括但不限于
   - 基于NetCat实现的HTTP/FTP/代理服务器
   - 基于NetCat实现的扫描器/嗅探器/加密ShellorWebShell
