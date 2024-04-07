@@ -1,28 +1,27 @@
 '''
 arp attack test
 '''
-import os
+#*import os
 import sys
 import time
 from multiprocessing import Process
+from typing import Optional
 from scapy.all import (
-    ARP,
-    Ether,
     conf,
     send,
     sniff,
     srp,
     wrpcap
 )
+from scapy.layers.l2 import ARP,Ether
 
-def get_mac(targetip:str) -> str:
+def get_mac(targetip:str) -> Optional[str]:
     '''广播询问ip对应mac地址'''
     #! 创建查询数据包
     packet = Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(op="who-has",pdst=targetip)
     resp , _ = srp(packet,timeout=2,retry=10,verbose=False)
     for _ , r in resp:
         return r["Ether"].src
-    return None
 
 class Arper(object):
     '''Arp attacker'''
